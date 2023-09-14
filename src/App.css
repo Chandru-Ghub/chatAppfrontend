@@ -1,0 +1,35 @@
+.chatApp{
+  /* background-color: red; */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.join{
+  background-color: rgb(25, 30, 25);
+  display:flex;
+  flex-direction: column;
+  padding: 10px;
+
+  >h2{
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+  >.jn{
+    min-width: 250px;
+    max-width: 300px;
+    /* background-color: red; */
+    margin-bottom: 10px;
+    height: 40px;
+    border-radius: 2px;
+    padding-left: 8px;
+  }
+  >.joinbtn{
+    background-color: rgb(11, 207, 11);
+    height: 50px;
+    font-size: 15px;
+  }
+}

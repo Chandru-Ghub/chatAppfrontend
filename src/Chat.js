@@ -4,6 +4,8 @@ const Chat = ({socket,user,room}) => {
 
     const [msg,setMsg] = useState('')
     const[txt,setTxt] = useState([])
+    const[onUsers,setOnUsers] = useState([])
+    const [show,setShow] = useState(true)
 
 
     const sendMessage=  async ()=>{
@@ -34,12 +36,31 @@ const Chat = ({socket,user,room}) => {
 
     useEffect(()=>{
         socket.on('received_msg',(data)=>{
-            // console.log(data);
+            console.log(data);
             // setTxt(data.message)
             setTxt((a)=>[...a,data])
             // console.log(txt);
-        })
-},[socket])
+        })},[socket])
+
+    useEffect(()=>{
+        socket.on('setjoin_room', (data,user,id)=>{
+
+           const userCheck = {
+                id:id,
+                newuser:user,
+                room:data,
+            }
+            
+            // setOnUsers(userCheck)
+            setTxt((a)=>[...a,userCheck])
+            // setTxt(f)
+           
+        })},[socket])
+       
+        // setTimeout(()=>{
+        //         setShow(false)
+        // },1500)
+        // console.log(onUsers);
   return (
     <div className='chatbox'>
         <div className="chatheader">
@@ -49,25 +70,34 @@ const Chat = ({socket,user,room}) => {
                 <div className="chatbody">
                     {/* {console.log(user)}
                     {console.log(txt)} */}
+                  
+    
+                     {/* {show?<p style={{color:'white'}}>{onUsers.user}</p>:null} */}
                     <ScrollToBottom className='scrollbottom'>
-                    {txt.map((a,i)=>{
-                    
-                        return <div key={i} className={a.user==user?'chatContainer left':'chatContainer right'}> 
-                                    <div className={a.user == user?'chatflex you':'chatflex notyou'}>
-                                        <p className='name'>{a.user==user?'You':a.user}</p>
-                                        <p className={a.user==user?'mychat':'otherchat'}>{a.message}</p>
-                                        <p className='time'>{a.time}</p>
-                                    </div>
+                    {txt.map((a,i)=>(
+                                <div>{a.newuser?<p className='enter'>{a.newuser==user?' you joined the chat': a.newuser+' joined the chat'}</p>:
+                                            <div key={i} className={a.user==user?'chatContainer left':'chatContainer right'}> 
+                                                {/* <p style={{color:'white'}}>{a.id}</p> */}
+                                                <div className={a.user == user?'chatflex you':'chatflex notyou'}>
+                                                    <p className='name'>{a.user==user?'You':a.user} </p>
+                                                    <p className={a.user==user?'mychat':'otherchat'}>{ a.message}</p>
+                                                    <p className='time'>{a.time}</p>
+                                                </div>
+                                            </div>}
                                 </div>
 
-                    }
+                    
                         
-                    )}
+                    ))}
                     </ScrollToBottom>
                 </div>
         <div className="chatfooter">
-            <textarea className='txt' value={msg} type="text" onChange={(e)=>setMsg(e.target.value)} placeholder='Type something...' />
-            <button onClick={sendMessage}>send</button>
+                        <div className="ipbox">
+                        <textarea className='txt' value={msg} type="text" onChange={(e)=>setMsg(e.target.value)} placeholder='Type something...' />
+            <button onClick={sendMessage}><span class="material-symbols-outlined">
+send
+</span></button>
+                        </div>
         </div>
     </div>
   )

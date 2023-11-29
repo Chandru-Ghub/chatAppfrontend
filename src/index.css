@@ -82,24 +82,24 @@
   background-color: rgb(16, 85, 23);
 }
 .ipbox{
-    background-color: white;
+    background-color: rgb(255, 255, 255);
   display: flex;
   align-items: end;
   justify-content: center;
-  padding: 5px;
-  border-radius: 5px;
-  border: 2px solid green;
+  padding: 2px 15px;
+  border-radius: 50px;
+  border: 2px solid rgb(169, 171, 169);
   >button{
     height: 35px;
     color: green;
     border: none;
-    padding: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     >span{
       transform: rotate(-10deg);
     }
+   background: none;
   }
   >.txt::placeholder{
     display: flex;
@@ -133,6 +133,11 @@
 .txt{
   border: 1px solid white;
   outline: none;
+  font-size: 15px;
+  font-weight: 700;
+  min-width: 225px;
+  padding-top: 5px;
+  border-radius: 5px;
 
 }
 .right{

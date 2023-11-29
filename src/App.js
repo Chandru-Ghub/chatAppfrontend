@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="chatApp">
       {!showChat?<form className='join' onSubmit={handleSubmit} >
-        <h2>join a chat</h2>
+        <h2>FUN chat </h2>
         <input required className='usname jn' placeholder='user name' onChange={(e)=>setUser(e.target.value)} type="text" />
         <input required className='roomid jn' placeholder='Room ID' onChange={(e)=>setRoom(e.target.value)} type="text" />
         <button className='joinbtn' type='submit'>Join room</button>
